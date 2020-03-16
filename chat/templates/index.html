@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Chat ITSR</title>
+    <link rel="stylesheet" type="text/css" href="/style/style.css">
+  </head>
+  <body>
+    <h1>¡Bienvenido a la sala de chat del Instituto Tecnológico Superior de los Ríos!</h1>
+      <h2>¡Esperamos que tu estancia en el chat sea divertida!</h2>
+
+      <p>
+        Te encuentras conectado ahora, se respetuoso y amable con todos
+      </p>
+
+      <ul id="messages"></ul>
+      <input type="text" id="myMessage">
+      <button type="button" id="send">Enviar</button>
+
+        <!--JQuery-->
+      <script
+			  src="http://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+
+        <!--SocketIO-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" charset="utf-8"></script>
+      <script>
+        const socket = io();
+
+        //socket.emit('message', '¡Hola!');
+
+        socket.on('message', function (msg) {
+          $('#messages').append('<li>' + msg + '</li>')
+        })
+
+        $('#send').on('click', function (){
+          socket.send($('#myMessage').val());
+          $('#miMensaje').val('');
+        });
+
+
+      </script>
+  </body>
+</html>
